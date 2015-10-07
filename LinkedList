@@ -1,0 +1,102 @@
+package testdatastructure;
+
+public class LinkedList {
+
+	private Node head = null;
+	
+	
+	public Node getFirstNode(){
+		return head;
+	}
+	
+	public Node next(Node head){
+		if(head==null)
+			return null;
+		else
+			return head.next;
+	}
+	
+	public void addNode(int val) {
+        Node lastNode = getLastNode();
+        if (lastNode == null) {
+            head = new Node(val);
+        } else {
+            lastNode.next = new Node(val);
+        }
+    }
+	
+	public Node getLastNode() {
+        if (head == null) {
+            return null;
+        }
+        Node tmpNode = head;
+        while (tmpNode.next != null) {
+            tmpNode = tmpNode.next;
+        }
+        return tmpNode;
+    }
+	
+	public void print() {
+        System.out.println("");
+        if(head == null){
+            System.out.print("EMPTY");
+            return;
+        }
+        Node tmpNode = head;
+        while (tmpNode != null) {
+            System.out.print(tmpNode.num + " -> ");
+            tmpNode = tmpNode.next;
+        }
+    }
+	
+	public void delete(int val) {
+        if(head == null){
+            return;
+        }
+
+        Node prevNode = null;
+        Node currNode = head;
+        while (currNode != null && currNode.num != val) {
+            prevNode = currNode;
+            currNode = currNode.next;
+        }
+        if(prevNode == null){
+            head = head.next;
+            return;
+        }
+        if (currNode == null) {
+            System.out.println("A node with that value does not exist.");
+            return;
+        }
+        prevNode.next = currNode.next;
+    }
+	public int getNthNode(int index){
+		if(index==1)
+			return head.num;
+		int count=0;
+		Node currNode=head;
+		int value=0;
+		while(currNode.next!=null){
+			if(count!=index){
+				currNode=currNode.next;
+				count++;
+			}else{
+				value=currNode.num;
+				break;
+			}
+		}
+		return value;
+	}
+	public int getLength(){
+		if(head==null)
+			return 0;
+		Node currNode=head;
+		int count=0;
+		while(currNode!=null){
+			currNode=currNode.next;
+			count++;
+		}
+		return count;
+		
+	}
+}
